@@ -7,7 +7,14 @@ numpy
 pandas
 transformers
 fastapi
+pydantic[email]
 uvicorn
 beanie
 asyncio
 colorlog
+gunicorn
+SQLAlchemy
+sqlmodel
+passlib
+python-jose
+python-multipart

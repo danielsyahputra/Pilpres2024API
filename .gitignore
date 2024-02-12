@@ -2,4 +2,6 @@
 *.ipynb
 **__pycache__**
 data
-
+env
+.env
+venv
