@@ -1,0 +1,57 @@
+version: "3"
+services:
+  # app:
+  #   image: pilpres_analyzer_app
+  #   container_name: pilpres_analyzer_app
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   tty: true
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ${STREAMLIT_PORT}:${STREAMLIT_PORT}
+  #   volumes:
+  #     - .:/app
+  #   networks:
+  #     - pilpres_analyzer
+  
+  api:
+    container_name: pilpres_analyzer_api
+    image: pilpres-analyzer
+    restart: always
+    tty: true
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    ports:
+      - ${API_PORT}:${API_PORT}
+    networks:
+      - pilpres_analyzer
+
+  mongo:
+    container_name: pilpres_analyzer_mongo
+    image: mongo
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./data/mongodb:/data/db
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    expose:
+      - ${MONGO_PORT}
+    command: mongod --port ${MONGO_PORT}
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: alfabeta123
+    networks:
+      - pilpres_analyzer
+
+networks:
+  pilpres_analyzer:

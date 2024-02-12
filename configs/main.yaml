@@ -1,0 +1,17 @@
+# Default configurations
+defaults:
+  - _self_
+  - api: [main]
+  - database: [mongo]
+  - logger: [config]
+  - override hydra/hydra_logging: none
+  - override hydra/job_logging: none
+
+# Override hydra output directory
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+
+# service mode
+mode: api 

@@ -1,0 +1,31 @@
+# Server configurations
+host: 0.0.0.0 # host
+port: ${oc.env:API_PORT} # port. define in .env file
+workers: 5 # number of workers
+timeout: 60 # seconds
+
+# Authentication configurations
+auth:
+  basic:
+    username: ${oc.env:API_BASIC_AUTH_USERNAME} # basic auth username
+    password: ${oc.env:API_BASIC_AUTH_PASSWORD} # basic auth password
+  bearer:
+    secret: ${oc.env:API_SECRET_KEY} # secret key for JWT
+    algorithm: HS256  # authentication algorithm
+    expiration: 3600 # seconds
+    encrypt_scheme: # encryption scheme for password hashing
+      - bcrypt # bcrypt, pbkdf2_sha256, sha256_crypt, sha512_crypt, md5_crypt, plaintext
+
+# CORS configurations
+middleware:
+  cors:
+    allow_origins: # allowed origins
+      - "*"
+    allow_methods: # allowed methods
+      - "*"
+    allow_headers: # allowed headers
+      - "*"
+    allow_credentials: true # allow credentials
+  rate_limiter:
+    limit: 60 # limit
+    window: 60 # seconds

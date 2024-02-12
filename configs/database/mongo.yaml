@@ -1,0 +1,8 @@
+# Mongodb configs
+
+mongodb:
+  host: ${oc.env:MONGO_HOST} # docker container name
+  port: ${oc.env:MONGO_PORT} # port. define in .env file
+  user: ${oc.env:MONGO_INITDB_ROOT_USERNAME} # username. define in .env file
+  password: ${oc.env:MONGO_INITDB_ROOT_PASSWORD} # password. define in .env file
+  db: ${oc.env:MONGO_DB_NAME}

@@ -1,0 +1,13 @@
+credentials:
+  usernames:
+    alfabeta:
+      email: alfabeta@gmail.co.id
+      name: Alfabeta
+      password: $2b$12$RY2/YI.E8LYD0x7Oo8imiuzUcDSTdjzXicfparNIl9U0lPLxxeiEC
+cookie:
+  expiry_days: 1
+  key: cookie # Must be string
+  name: cookie
+preauthorized:
+  emails:
+  - dnlshp@gmail.com

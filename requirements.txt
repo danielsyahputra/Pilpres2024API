@@ -1,0 +1,13 @@
+hydra-core
+PyYAML
+python-dotenv
+pyrootutils
+opencv-python
+numpy
+pandas
+transformers
+fastapi
+uvicorn
+beanie
+asyncio
+colorlog
