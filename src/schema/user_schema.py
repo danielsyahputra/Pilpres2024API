@@ -14,7 +14,7 @@ from datetime import datetime
 from typing_extensions import Annotated
 
 from beanie import Document
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 
 import src.utils.timer as t
 

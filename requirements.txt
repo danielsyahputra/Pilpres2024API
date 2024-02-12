@@ -7,7 +7,7 @@ numpy
 pandas
 transformers
 fastapi
-pydantic[email]
+pydantic[email]<2
 uvicorn
 beanie
 asyncio
