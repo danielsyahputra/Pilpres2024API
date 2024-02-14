@@ -14,7 +14,7 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 
 import src.utils.exceptions as exceptions
-from src.schema.auth_schema import CurrentUser
+from schema.auth.auth_schema import CurrentUser
 
 class Authentication:
     """Authentication class for the API."""

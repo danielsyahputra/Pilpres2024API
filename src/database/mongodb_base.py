@@ -12,7 +12,7 @@ ROOT = pyrootutils.setup_root(
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from src.schema.user_schema import User
+from schema.user.user_schema import User
 from src.utils.logger import get_logger
 
 log = get_logger()
