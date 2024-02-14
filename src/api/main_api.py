@@ -27,6 +27,8 @@ def main_api(cfg: DictConfig) -> None:
     from src.api.runner import GunicornRunner
     from src.database.mongodb_base import MongodbBase
     from src.api.base_api import BaseAPI
+
+    from src.api.services.pilpres_api import PilpresAPI
     
     log.info(f"Starting API server at {cfg.api.host}:{cfg.api.port}...")
     
@@ -41,6 +43,7 @@ def main_api(cfg: DictConfig) -> None:
     
     # API service
     base_api = BaseAPI(cfg, mongodb)
+    pilpres_api = PilpresAPI(cfg)
     
     app = FastAPI(
         title=f"Pilpres 2024 Sentiment Analysis REST API",
@@ -58,11 +61,9 @@ def main_api(cfg: DictConfig) -> None:
         allow_methods=cfg.api.middleware.cors.allow_methods,
         allow_headers=cfg.api.middleware.cors.allow_headers,
     )
-
-    # # setup router service
-    # log.info("Mounting Static...")
-    # app.mount("/my_files", StaticFiles(directory="data/sftp_cache"), name="static")
+    
     app.include_router(base_api.router)
+    app.include_router(pilpres_api.router)
     
     # setup runner
     runner = GunicornRunner(

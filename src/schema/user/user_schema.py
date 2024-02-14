@@ -27,9 +27,7 @@ class UserOut(BaseModel):
 
 
 class User(Document):
-    """User schema model for database."""
-
-    username: str = Field(...,)
+    username: str = Field(...)
     email: EmailStr = Field(...)
     password: str = Field(...)
     is_active: bool = Field(...)
@@ -39,7 +37,7 @@ class User(Document):
     deleted_at: Optional[datetime] = Field(None)
 
     class Settings:
-        name = "users"
+        name = "Users"
         indexes = ["username", "email"]
 
     def to_out(self) -> UserOut:
@@ -57,8 +55,8 @@ class UserRegister(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "username": "alfabeta",
-                "email": "alfabeta@mail.com",
+                "username": "anonymous",
+                "email": "anonymous@mail.com",
                 "password": "superstrong",
             }
         }
@@ -91,8 +89,8 @@ class UserRegisterResponse(BaseModel):
                 "status": "success",
                 "message": "User registered",
                 "data": {
-                    "username": "alfabeta",
-                    "email": "alfabeta@mail.com",
+                    "username": "anonymous",
+                    "email": "anonymous@mail.com",
                 },
                 "elapsed": 50.00,
             }

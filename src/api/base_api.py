@@ -24,9 +24,9 @@ from omegaconf import DictConfig
 
 import src.utils.exceptions as exceptions
 import src.utils.timer as t
-from schema.auth.auth_schema import CurrentUser, Token
+from src.schema.auth.auth_schema import CurrentUser, Token
 from src.database.mongodb_base import MongodbBase
-from schema.user.user_schema import User, UserRegister, UserRegisterResponse
+from src.schema.user.user_schema import User, UserRegister, UserRegisterResponse
 from src.utils.auth import Authentication
 from src.utils.logger import get_logger
 
