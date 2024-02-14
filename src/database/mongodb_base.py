@@ -12,8 +12,9 @@ ROOT = pyrootutils.setup_root(
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from schema.user.user_schema import User
+from src.schema.user.user_schema import User
 from src.utils.logger import get_logger
+from src.schema.database.article_schema import GoogleNews
 
 log = get_logger()
 
@@ -50,6 +51,7 @@ class MongodbBase:
                 database=self.client[self.db],
                 document_models=[
                     User,
+                    GoogleNews
                 ],
             )
             log.log(22, f"Connected to mongodb: {self.host}:{self.port}/{self.db}")

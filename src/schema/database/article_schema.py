@@ -12,7 +12,7 @@ from datetime import datetime
 from beanie import Document
 from pydantic import BaseModel, Field
 from enum import Enum
-from typing import Any, List
+from typing import Any, List, Optional
 
 import src.utils.timer as t
 
@@ -31,11 +31,11 @@ class Article(BaseModel):
 
 class GoogleNews(Document):
     title: str = Field(...)
-    description: str = Field(None)
-    published_date: datetime = Field(None)
-    url: str = Field(None)
-    publisher: str = Field(None)
-    article: Article = Field(None)
+    description: Optional[str] = Field(None)
+    published_date: Optional[datetime] = Field(None)
+    url: Optional[str] = Field(None)
+    publisher: Optional[Any] = Field(None)
+    article: Article = Field(...)
 
     class Config:
         arbitrary_types_allowed = True
