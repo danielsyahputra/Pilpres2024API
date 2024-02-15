@@ -26,6 +26,7 @@ class Article(BaseModel):
     title: str = Field(...)
     text: str = Field(...)
     summary: str = Field(...)
+    publish_date: Optional[datetime] = Field(None)
     keywords: List[str] = Field(None)
     sentiment: Sentiment = Field(Sentiment.unknown)
 
