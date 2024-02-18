@@ -13,7 +13,7 @@ from omegaconf import DictConfig
 
 import os
 from bson import ObjectId
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from pathlib import Path
 import src.utils.exceptions as exceptions
 import src.utils.timer as t
@@ -24,11 +24,28 @@ from src.database.mongodb_base import MongodbBase
 from src.utils.auth import Authentication
 from src.utils.logger import get_logger
 from src.api.base_api import BaseAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from src.schema.database.article_schema import GoogleNews
+from src.schema.database.article_schema import (
+    GoogleNews,
+    Article,
+    Sentiment
+)
 from src.schema.services.pilpres_api import *
+from src.utils.services.fetch_news import fetch_related_news
+
+import warnings
+warnings.filterwarnings("ignore")    
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 log = get_logger()
 
@@ -38,6 +55,8 @@ class PilpresAPI(BaseAPI):
         self.app = app
         self.router = APIRouter()
         self.auth = Authentication(**self.cfg.api.auth.bearer)
+
+        # engine
         self.setup()
 
     def setup(self) -> None:
@@ -56,11 +75,10 @@ class PilpresAPI(BaseAPI):
         ):
             log.log(25, f"Fetch news request from: {current_user.username} - {request.client.host}")
 
-            print(form)
-            print(form.query, print(type(form.query)))
-            print(form.start_date, print(type(form.start_date)))
-
-            news_result = await GoogleNews.find_all().to_list()
+            news_result = await fetch_related_news(query=form.query, 
+                                                        limit_per_day=form.limit_per_day,
+                                                        start_date=form.start_date,
+                                                        end_date=form.end_date)
             news_result = [NewsResult(id=str(news.id),
                                       title=news.title,
                                       description=news.description,

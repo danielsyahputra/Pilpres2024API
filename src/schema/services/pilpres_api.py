@@ -32,6 +32,7 @@ __all__ = [
 
 class FetchNewsRequest(BaseModel):
     query: str = Form(...)
+    limit_per_day: int = Form(default=100)
     start_date: date = Form(...)
     end_date: date = Form(default=date.today())
 
