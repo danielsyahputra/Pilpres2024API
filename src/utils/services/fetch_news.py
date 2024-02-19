@@ -1,5 +1,6 @@
 import nltk
 from gnews import GNews
+from newspaper import Article as ArticleNews
 from datetime import datetime, date, timedelta
 from transformers import pipeline
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
