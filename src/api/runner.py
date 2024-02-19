@@ -57,7 +57,7 @@ class GunicornRunner:
 
 
 class UvicornRunner:
-    def __init__(self, app, host, port, log_level):
+    def __init__(self, app, host, port, log_level=None):
         self.app = app
         self.host = host
         self.port = port

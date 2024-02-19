@@ -24,7 +24,7 @@ def main_api(cfg: DictConfig) -> None:
     from fastapi import FastAPI
     from fastapi.staticfiles import StaticFiles
     from fastapi.middleware.cors import CORSMiddleware
-    from src.api.runner import GunicornRunner
+    from src.api.runner import GunicornRunner, UvicornRunner
     from src.database.mongodb_base import MongodbBase
     from src.api.base_api import BaseAPI
 
@@ -66,11 +66,10 @@ def main_api(cfg: DictConfig) -> None:
     app.include_router(pilpres_api.router)
     
     # setup runner
-    runner = GunicornRunner(
+    runner = UvicornRunner(
         app,
         host=cfg.api.host,
-        port=cfg.api.port,
-        workers=cfg.api.workers,
-        log_level=cfg.logger.level,
+        port=int(cfg.api.port),
+        log_level=cfg.logger.level.lower(),
     )
     runner.run()
